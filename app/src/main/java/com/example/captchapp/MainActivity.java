@@ -68,20 +68,19 @@ public class MainActivity extends AppCompatActivity {
         list.add(img13);
         list.add(img14);
         list.add(img15);
-
-        ArrayList<Integer> list1 = new ArrayList<Integer>();
-        for (int i=0; i<=11; i++) {
-            list1.add(new Integer(i));
+        ArrayList<Bitmap> bitmapList = new ArrayList<>(16);
+        for (int i = 0; i < 16; i++){
+            if(i < 12){
+                bitmapList.add(BitmapFactory.decodeFile("/storage/emulated/0/img/a0"+i+".png"));
+            } else {
+                bitmapList.add(BitmapFactory.decodeFile("/storage/emulated/0/img/b0"+(i-11)+".png"));
+            }
         }
-        Collections.shuffle(list1);
-
+        Collections.shuffle(bitmapList);
         if(isStoragePermissionGranted()){
             for (int i = 0; i < 16; i++){
-                if(i < 12){
-                    list.get(i).setImageBitmap(BitmapFactory.decodeFile("/storage/emulated/0/img/a0"+list1.get(i)+".png"));
-                } else {
-                    list.get(i).setImageBitmap(BitmapFactory.decodeFile("/storage/emulated/0/img/b0"+(i-11)+".png"));
-                }
+                list.get(i).setImageBitmap(bitmapList.get(i));
+
             }
         }
 
