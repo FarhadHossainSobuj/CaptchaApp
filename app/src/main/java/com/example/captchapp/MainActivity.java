@@ -68,21 +68,34 @@ public class MainActivity extends AppCompatActivity {
         list.add(img13);
         list.add(img14);
         list.add(img15);
-        ArrayList<Bitmap> bitmapList = new ArrayList<>(16);
-        for (int i = 0; i < 16; i++){
-            if(i < 12){
-                bitmapList.add(BitmapFactory.decodeFile("/storage/emulated/0/img/a0"+i+".png"));
-            } else {
-                bitmapList.add(BitmapFactory.decodeFile("/storage/emulated/0/img/b0"+(i-11)+".png"));
-            }
+
+        ArrayList<Integer> list1 = new ArrayList<Integer>(16);
+        ArrayList<Integer> tagList = new ArrayList<Integer>(16);
+        for (int i=0; i<=15; i++) {
+            list1.add(new Integer(i));
         }
-        Collections.shuffle(bitmapList);
+        Collections.shuffle(list1);
+        for (int i=0; i<=15; i++) {
+            tagList.add(list1.get(i));
+        }
+
         if(isStoragePermissionGranted()){
             for (int i = 0; i < 16; i++){
-                list.get(i).setImageBitmap(bitmapList.get(i));
-
+                if(i < 12){
+                    list.get(i).setImageBitmap(BitmapFactory.decodeFile("/storage/emulated/0/img/a0"+list1.get(i)+".png"));
+                    list.get(i).setTag(""+tagList.get(i));
+                } else {
+                    list.get(i).setImageBitmap(BitmapFactory.decodeFile("/storage/emulated/0/img/b0"+(i-11)+".png"));
+                    list.get(i).setTag(""+tagList.get(i));
+                }
             }
         }
+        img0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, ""+ img0.getTag(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
     @Override

@@ -47,7 +47,6 @@
             android:layout_margin="1dp"
             android:alpha="1"
             android:background="#FFC107"
-            android:tag="0"
             app:layout_column="0"
             app:layout_row="0" />
 
