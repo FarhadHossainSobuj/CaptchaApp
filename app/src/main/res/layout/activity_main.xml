@@ -9,13 +9,13 @@
 
     <android.support.v7.widget.GridLayout
         android:id="@+id/gridLayoutOut"
-        android:layout_width="285dp"
+        android:layout_width="210dp"
         android:layout_height="285dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="#FFC107"
-        app:columnCount="4"
+        app:columnCount="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.463"
         app:layout_constraintStart_toStartOf="parent"

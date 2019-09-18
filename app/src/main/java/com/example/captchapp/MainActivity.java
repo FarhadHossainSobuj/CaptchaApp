@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         img13 = findViewById(R.id.img13);
         img14 = findViewById(R.id.img14);
         img15 = findViewById(R.id.img15);
-        List<ImageView> list = new ArrayList<>(15);
+        final List<ImageView> list = new ArrayList<>(15);
         list.add(img0);
         list.add(img1);
         list.add(img2);
@@ -70,24 +70,27 @@ public class MainActivity extends AppCompatActivity {
         list.add(img15);
 
         ArrayList<Integer> list1 = new ArrayList<Integer>(16);
+        ArrayList<Bitmap> bitmaps = new ArrayList<>(16);
         ArrayList<Integer> tagList = new ArrayList<Integer>(16);
+
         for (int i=0; i<=15; i++) {
             list1.add(new Integer(i));
+        }
+        for (int i=0; i<=15; i++) {
+            if(i < 12){
+                bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/a0"+(i+1)+".png"));
+            } else {
+                bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/b0"+(i-11)+".png"));
+            }
         }
         Collections.shuffle(list1);
         for (int i=0; i<=15; i++) {
             tagList.add(list1.get(i));
         }
-
         if(isStoragePermissionGranted()){
             for (int i = 0; i < 16; i++){
-                if(i < 12){
-                    list.get(i).setImageBitmap(BitmapFactory.decodeFile("/storage/emulated/0/img/a0"+list1.get(i)+".png"));
-                    list.get(i).setTag(""+tagList.get(i));
-                } else {
-                    list.get(i).setImageBitmap(BitmapFactory.decodeFile("/storage/emulated/0/img/b0"+(i-11)+".png"));
-                    list.get(i).setTag(""+tagList.get(i));
-                }
+                list.get(i).setImageBitmap(bitmaps.get(list1.get(i)));
+                list.get(i).setTag(""+tagList.get(i));
             }
         }
         img0.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
