@@ -91,7 +91,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             if(i < 12){
                 bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/"+imgIndex+"/"+(i+1)+".png"));
             } else {
-                bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/"+rand+"/"+(i-3)+".png"));
+                if(imgIndex >= 3){
+                    bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/"+(imgIndex-1)+"/"+(i-3)+".png"));
+                }else {
+                    bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/"+(imgIndex+1)+"/"+(i-3)+".png"));
+                }
             }
         }
         Collections.shuffle(list1);
