@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     private int dragCounter, success;
 
+    public static String xCord = "";
+    public static String yCord = "";
+
     private ImageView img0, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,20 +207,27 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     LinearLayout target = (LinearLayout) v;
                     target.addView(view);
                     id = target.getTag().toString();
+
+                    dragCounter = dragCounter + 1;
+                    if(Integer.parseInt(id) == Integer.parseInt(view.getTag().toString())){
+                        success = success + 1;
+                    }
+                    view.setVisibility(View.VISIBLE);
+                    float x = event.getX();
+                    float y = event.getY();
+                    xCord += " "+x;
+                    yCord += " "+y;
+                    if(dragCounter >= 12){
+                        Intent intent = new Intent(this, Result.class);
+                        intent.putExtra("xCord", xCord);
+                        intent.putExtra("yCord", yCord);
+                        intent.putExtra("result", "" + success);
+                        startActivity(intent);
+                    }
                 }
                 // make view visible as we set visibility to invisible while starting drag
                 //Toast.makeText(this, "" + view.getTag().toString(), Toast.LENGTH_SHORT).show();
-                dragCounter = dragCounter + 1;
-                if(Integer.parseInt(id) == Integer.parseInt(view.getTag().toString())){
-                    success = success + 1;
-                }
-                view.setVisibility(View.VISIBLE);
-                if(dragCounter >= 12){
-                    Intent intent = new Intent(this, Result.class);
-                    intent.putExtra("result", "" + success);
-                    startActivity(intent);
-                }
-                //Toast.makeText(this, "Dragged: "+dragCounter+" Success: " + success, Toast.LENGTH_SHORT).show();
+
                 break;
         }
 

@@ -1,11 +1,14 @@
 package com.example.captchapp;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
