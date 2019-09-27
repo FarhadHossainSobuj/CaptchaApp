@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 public class Result extends AppCompatActivity {
-    String coords = "";
+    String coords;
     TextView tv;
     private String userData = "userData";
     @Override
@@ -25,12 +25,13 @@ public class Result extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         setTitle("Result");
-
+        coords = "";
         tv = (TextView)findViewById(R.id.textView);
         int result = Integer.parseInt(getIntent().getStringExtra("result"));
         String x = getIntent().getStringExtra("xCord");
         String y = getIntent().getStringExtra("yCord");
-        coords ="X : "+ x + "\nY: "+y+"\n\n";
+        String imgNo = getIntent().getStringExtra("imgNo");
+        coords ="For Capthca Image : " + imgNo + "\nX : "+ x + "\nY: "+y+"\n\n";
         tv.setText("Your accuracy is: " + (float)((result*100)/12) + "%");
 
         ContextWrapper cw = new ContextWrapper(getApplicationContext());

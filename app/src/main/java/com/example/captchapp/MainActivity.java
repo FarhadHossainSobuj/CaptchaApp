@@ -35,17 +35,20 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private static final int PERMISSION_REQUEST_CODE=100;
 
     private int dragCounter, success;
+    int imgIndex;
 
-    public static String xCord = "";
-    public static String yCord = "";
+    public static String xCord ;
+    public static String yCord;
 
     private ImageView img0, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        int imgIndex = Integer.parseInt(getIntent().getStringExtra("testImageNo"));
-        int totalTestImage = 6;
+        imgIndex = Integer.parseInt(getIntent().getStringExtra("testImageNo"));
+        int totalTestImage = 17;
+        xCord = "";
+        yCord = "";
 
         img0 = findViewById(R.id.img0);
         img1 = findViewById(R.id.img1);
@@ -211,6 +214,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     dragCounter = dragCounter + 1;
                     if(Integer.parseInt(id) == Integer.parseInt(view.getTag().toString())){
                         success = success + 1;
+                        Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(this, "Wrong", Toast.LENGTH_SHORT).show();
                     }
                     view.setVisibility(View.VISIBLE);
                     float x = event.getX();
@@ -221,6 +227,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         Intent intent = new Intent(this, Result.class);
                         intent.putExtra("xCord", xCord);
                         intent.putExtra("yCord", yCord);
+                        intent.putExtra("imgNo", ""+imgIndex);
                         intent.putExtra("result", "" + success);
                         startActivity(intent);
                     }

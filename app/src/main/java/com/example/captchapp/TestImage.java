@@ -26,7 +26,7 @@ public class TestImage extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_test_image);
 
-        int totalTestImage = 6;
+        int totalTestImage = 17;
 
         final ArrayList<Integer> list1 = new ArrayList<Integer>(totalTestImage);
         ArrayList<Bitmap> bitmaps = new ArrayList<>(totalTestImage);
