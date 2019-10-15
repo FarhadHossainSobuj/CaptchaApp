@@ -1,4 +1,5 @@
 package com.example.captchapp;
+
 import android.Manifest;
 import android.content.ClipData;
 import android.content.Intent;
@@ -6,17 +7,14 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
-import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -26,7 +24,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener, View.OnDragListener {
+public class ActivityEasyTask extends AppCompatActivity implements View.OnTouchListener, View.OnDragListener {
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -39,15 +37,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     public static String xCord ;
     public static String yCord;
-
-    private ImageView img0, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15,sampleTestImage;
+    private ImageView img0, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_easy_task);
 
         imgIndex = Integer.parseInt(getIntent().getStringExtra("testImageNo"));
-        int totalTestImage = 17;
+
+        int totalTestImage = 5;
         xCord = "";
         yCord = "";
 
@@ -67,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         img13 = findViewById(R.id.img13);
         img14 = findViewById(R.id.img14);
         img15 = findViewById(R.id.img15);
-        sampleTestImage = findViewById(R.id.sampleTestImage);
         final List<ImageView> list = new ArrayList<>(15);
         list.add(img0);
         list.add(img1);
@@ -96,8 +93,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         int rand = new Random().nextInt(5);
         for (int i=0; i<=15; i++) {
-            if(i < 12){
-                bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+imgIndex+"/"+(i+1)+".png"));
+            if(i < 4){
+                bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/easy/"+imgIndex+"/"+(i+1)+".png"));
             } else {
                 if(imgIndex >= 3){
                     bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+(imgIndex-1)+"/"+(i-3)+".png"));
@@ -111,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             tagList.add(list1.get(i));
         }
         if(isStoragePermissionGranted()){
-            sampleTestImage.setImageBitmap(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+imgIndex+"/"+"0.png"));
+            //sampleTestImage.setImageBitmap(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+imgIndex+"/"+"0.png"));
             for (int i = 0; i < 16; i++){
                 list.get(i).setImageBitmap(bitmaps.get(list1.get(i)));
                 list.get(i).setTag(""+tagList.get(i));
@@ -126,14 +123,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         findViewById(R.id.inputLayout2).setOnDragListener(this);
         findViewById(R.id.inputLayout3).setOnDragListener(this);
         findViewById(R.id.inputLayout4).setOnDragListener(this);
-        findViewById(R.id.inputLayout5).setOnDragListener(this);
-        findViewById(R.id.inputLayout6).setOnDragListener(this);
-        findViewById(R.id.inputLayout7).setOnDragListener(this);
-        findViewById(R.id.inputLayout8).setOnDragListener(this);
-        findViewById(R.id.inputLayout9).setOnDragListener(this);
-        findViewById(R.id.inputLayout10).setOnDragListener(this);
-        findViewById(R.id.inputLayout11).setOnDragListener(this);
-        findViewById(R.id.inputLayout12).setOnDragListener(this);
 
     }
 
@@ -206,9 +195,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 View view = (View) event.getLocalState();
                 // we want to make sure it is dropped only to left and right parent view
                 if (v.getId() == R.id.inputLayout1 || v.getId() == R.id.inputLayout2 || v.getId() == R.id.inputLayout3
-                        || v.getId() == R.id.inputLayout4 || v.getId() == R.id.inputLayout5 || v.getId() == R.id.inputLayout6
-                        || v.getId() == R.id.inputLayout7 || v.getId() == R.id.inputLayout8 || v.getId() == R.id.inputLayout9
-                        || v.getId() == R.id.inputLayout10 || v.getId() == R.id.inputLayout11 || v.getId() == R.id.inputLayout12) {
+                        || v.getId() == R.id.inputLayout4) {
                     ViewGroup source = (ViewGroup) view.getParent();
                     source.removeView(view);
                     LinearLayout target = (LinearLayout) v;
@@ -227,11 +214,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     float y = event.getY();
                     xCord += " "+x;
                     yCord += " "+y;
-                    if(dragCounter >= 12){
+                    if(dragCounter >= 4){
                         Intent intent = new Intent(this, Result.class);
                         intent.putExtra("xCord", xCord);
                         intent.putExtra("yCord", yCord);
-                        intent.putExtra("mode", "hard");
+                        intent.putExtra("mode", "easy");
                         intent.putExtra("imgNo", ""+imgIndex);
                         intent.putExtra("result", "" + success);
                         startActivity(intent);

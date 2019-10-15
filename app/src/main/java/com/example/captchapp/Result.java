@@ -27,12 +27,27 @@ public class Result extends AppCompatActivity {
         setTitle("Result");
         coords = "";
         tv = (TextView)findViewById(R.id.textView);
-        int result = Integer.parseInt(getIntent().getStringExtra("result"));
+        double result = Double.parseDouble(getIntent().getStringExtra("result"));
         String x = getIntent().getStringExtra("xCord");
         String y = getIntent().getStringExtra("yCord");
+        String mode = getIntent().getStringExtra("mode");
         String imgNo = getIntent().getStringExtra("imgNo");
-        coords ="For Capthca Image : " + imgNo + "\nX : "+ x + "\nY: "+y+"\n\n";
-        tv.setText("Your accuracy is: " + (float)((result*100)/12) + "%");
+        String age = UserInfo.usersAge;
+        String gender = UserInfo.gender;
+        String vision = UserInfo.vision;
+        String hand = UserInfo.hand;
+
+        coords ="Age : " + age + ", Gender : " + gender + ", Vision : " + vision
+                + ", Hand : " + hand + "\nFor Capthca Image : " + imgNo + ", Mode : " + mode + "\nX : "+ x + "\nY: "+y+"\n\n";
+
+        if(mode.equals("easy")){
+            tv.setText(" Your accuracy is: " + (float)((result*100)/4) + "%\n Age : " + age
+                    + ", Gender : " + gender + ", Vision : " + vision + "\n Hand : " + hand);
+        } else {
+            tv.setText(" Your accuracy is: " + (float)((result*100)/12) + "%\n Age : " + age
+                    + ", Gender : " + gender + ", Vision : " + vision + "\n Hand : " + hand);
+        }
+
 
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File myExFile = new File(cw.getExternalFilesDir("/HandMotionData" ),"motionData.txt");

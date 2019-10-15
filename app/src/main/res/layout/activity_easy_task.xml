@@ -1,123 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00BCD4"
-    tools:context=".MainActivity">
+    tools:context=".ActivityEasyTask">
 
     <android.support.v7.widget.GridLayout
         android:id="@+id/gridLayoutOut"
-        android:layout_width="210dp"
-        android:layout_height="285dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="101dp"
         android:background="#FFC107"
-        app:columnCount="3"
+        app:columnCount="2"
+        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintHorizontal_bias="0.437"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:rowCount="4">
+        app:rowCount="2">
+
         <LinearLayout
             android:id="@+id/inputLayout1"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:orientation="horizontal"
-            app:layout_column="0"
             android:tag="0"
+            app:layout_column="0"
             app:layout_row="0"></LinearLayout>
+
         <LinearLayout
             android:id="@+id/inputLayout2"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:orientation="horizontal"
-            app:layout_column="1"
             android:tag="1"
+            app:layout_column="1"
             app:layout_row="0"></LinearLayout>
+
         <LinearLayout
             android:id="@+id/inputLayout3"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:orientation="horizontal"
-            app:layout_column="2"
             android:tag="2"
-            app:layout_row="0"></LinearLayout>
+            app:layout_column="0"
+            app:layout_row="1"></LinearLayout>
+
         <LinearLayout
             android:id="@+id/inputLayout4"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:orientation="horizontal"
-            app:layout_column="0"
             android:tag="3"
-            app:layout_row="1"></LinearLayout>
-        <LinearLayout
-            android:id="@+id/inputLayout5"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:orientation="horizontal"
             app:layout_column="1"
-            android:tag="4"
             app:layout_row="1"></LinearLayout>
-        <LinearLayout
-            android:id="@+id/inputLayout6"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:orientation="horizontal"
-            app:layout_column="2"
-            android:tag="5"
-            app:layout_row="1"></LinearLayout>
-        <LinearLayout
-            android:id="@+id/inputLayout7"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:orientation="horizontal"
-            app:layout_column="0"
-            android:tag="6"
-            app:layout_row="2"></LinearLayout>
-        <LinearLayout
-            android:id="@+id/inputLayout8"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:orientation="horizontal"
-            app:layout_column="1"
-            android:tag="7"
-            app:layout_row="2"></LinearLayout>
-        <LinearLayout
-            android:id="@+id/inputLayout9"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:orientation="horizontal"
-            app:layout_column="2"
-            android:tag="8"
-            app:layout_row="2"></LinearLayout>
-        <LinearLayout
-            android:id="@+id/inputLayout10"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:orientation="horizontal"
-            app:layout_column="0"
-            android:tag="9"
-            app:layout_row="3"></LinearLayout>
-        <LinearLayout
-            android:id="@+id/inputLayout11"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:orientation="horizontal"
-            app:layout_column="1"
-            android:tag="10"
-            app:layout_row="3"></LinearLayout>
-        <LinearLayout
-            android:id="@+id/inputLayout12"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:orientation="horizontal"
-            app:layout_column="2"
-            android:tag="11"
-            app:layout_row="3"></LinearLayout>
+
     </android.support.v7.widget.GridLayout>
 
     <android.support.v7.widget.GridLayout
@@ -126,14 +68,12 @@
         android:layout_height="285dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="30dp"
         android:background="#FFC107"
         app:columnCount="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayoutOut"
-        app:layout_constraintVertical_bias="0.678"
         app:rowCount="4">
 
         <ImageView
@@ -309,16 +249,7 @@
             android:tag="15"
             app:layout_column="3"
             app:layout_row="3" />
+
     </android.support.v7.widget.GridLayout>
 
-    <ImageView
-        android:id="@+id/sampleTestImage"
-        android:layout_width="76dp"
-        android:layout_height="77dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="307dp"
-        app:layout_constraintBottom_toTopOf="@+id/gridLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/gridLayoutOut"
-        app:layout_constraintTop_toTopOf="@+id/gridLayoutOut" />
 </android.support.constraint.ConstraintLayout>

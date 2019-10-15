@@ -12,14 +12,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TestImage">
+        <activity android:name=".ActivityEasyTask">
+
+        </activity>
+        <activity android:name=".TestImageEasy" />
+        <activity android:name=".ModeSelection" />
+        <activity android:name=".UserInfo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Result"/>
+        <activity android:name=".TestImage" />
+        <activity android:name=".Result" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
