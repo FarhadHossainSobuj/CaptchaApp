@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +22,7 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -34,22 +38,37 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     };
     private static final int PERMISSION_REQUEST_CODE=100;
 
+    public static int time;
+    public TextView mTextField;
+
     private int dragCounter, success;
     int imgIndex;
+    CountDownTimer tim = new CountDownTimer(60000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            time += 1;
+            mTextField.setText("" + millisUntilFinished / 1000);
+        }
 
-    public static String xCord ;
-    public static String yCord;
-
+        @Override
+        public void onFinish() {
+            Intent intent = new Intent(MainActivity.this, FailedActivity.class);
+            startActivity(intent);
+        }
+    };
+    List<String> xyData;
     private ImageView img0, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15,sampleTestImage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        xyData = new ArrayList<>();
+
+        time = 0;
+        mTextField = findViewById(R.id.timer);
         imgIndex = Integer.parseInt(getIntent().getStringExtra("testImageNo"));
         int totalTestImage = 17;
-        xCord = "";
-        yCord = "";
 
         img0 = findViewById(R.id.img0);
         img1 = findViewById(R.id.img1);
@@ -179,29 +198,38 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     @Override
     public boolean onDrag(View v, DragEvent event) {
+        Point touchPosition = null;
         switch (event.getAction()) {
             // signal for the start of a drag and drop operation
             case DragEvent.ACTION_DRAG_STARTED:
                 // do nothing
                 break;
-
             // the drag point has entered the bounding box of the View
             case DragEvent.ACTION_DRAG_ENTERED:
                 v.setBackgroundColor(0xFFFFF6F9);
                 break;
-
             // the user has moved the drag shadow outside the bounding box of the View
             case DragEvent.ACTION_DRAG_EXITED:
                 v.setBackgroundColor(v.getId() == R.id.inputLayout1 ? 0xFFE8E6E7 : 0xFFB1BEC4);
                 break;
-
             // the drag and drop operation has concluded
             case DragEvent.ACTION_DRAG_ENDED:
                 v.setBackgroundColor(v.getId() == R.id.inputLayout1 ? 0xFFE8E6E7 : 0xFFB1BEC4);
                 break;
+            case DragEvent.ACTION_DRAG_LOCATION:
+                // Ignore the event
+                String xy;
+                // Ignore the event
+                touchPosition = getTouchPositionFromDragEvent(v, event);
+                xy = touchPosition.x + "-" + touchPosition.y;
+                xyData.add(xy);
+                //Toast.makeText(this, "" + touchPosition.x, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, ""+ yData, Toast.LENGTH_SHORT).show();
+                break;
 
             //drag shadow has been released,the drag point is within the bounding box of the View
             case DragEvent.ACTION_DROP:
+                xyData.add("|");
                 String id = "";
                 View view = (View) event.getLocalState();
                 // we want to make sure it is dropped only to left and right parent view
@@ -216,6 +244,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     id = target.getTag().toString();
 
                     dragCounter = dragCounter + 1;
+                    if (dragCounter == 1){
+                        tim.start();
+                        Result.failedCounter += 1;
+                    }
                     if(Integer.parseInt(id) == Integer.parseInt(view.getTag().toString())){
                         success = success + 1;
                         Toast.makeText(this, "Correct", Toast.LENGTH_SHORT).show();
@@ -223,27 +255,19 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         Toast.makeText(this, "Wrong", Toast.LENGTH_SHORT).show();
                     }
                     view.setVisibility(View.VISIBLE);
-                    float x = event.getX();
-                    float y = event.getY();
-                    xCord += " "+x;
-                    yCord += " "+y;
                     if(dragCounter >= 12){
-                        Intent intent = new Intent(this, Result.class);
-                        intent.putExtra("xCord", xCord);
-                        intent.putExtra("yCord", yCord);
-                        intent.putExtra("mode", "hard");
-                        intent.putExtra("imgNo", ""+imgIndex);
-                        intent.putExtra("result", "" + success);
-                        startActivity(intent);
+                        transitionToResult();
                     }
                 }
-                // make view visible as we set visibility to invisible while starting drag
-                //Toast.makeText(this, "" + view.getTag().toString(), Toast.LENGTH_SHORT).show();
-
                 break;
         }
 
         return true;
+    }
+    public static Point getTouchPositionFromDragEvent(View item, DragEvent event) {
+        Rect rItem = new Rect();
+        item.getGlobalVisibleRect(rItem);
+        return new Point(rItem.left + Math.round(event.getX()), rItem.top + Math.round(event.getY()));
     }
 
     @Override
@@ -263,5 +287,29 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             return true;
         }
         return false;
+    }
+
+    public void onStartClicked(View view) {
+        tim.start();
+    }
+    public void onSubmitClicked(View view) {
+        tim.cancel();
+        transitionToResult();
+    }
+    public void onRetryClicked(View view) {
+        Intent intent = new Intent(this, TestImage.class);
+        intent.putExtra("time", time);
+        startActivity(intent);
+    }
+
+    public void transitionToResult(){
+        Intent intent = new Intent(this, Result.class);
+        intent.putExtra("xy", xyData.toString());
+        intent.putExtra("mode", "hard");
+        intent.putExtra("imgNo", ""+imgIndex);
+        intent.putExtra("result", "" + success);
+        intent.putExtra("time", "" + time);
+        tim.cancel();
+        startActivity(intent);
     }
 }

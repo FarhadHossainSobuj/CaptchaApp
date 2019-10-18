@@ -72,6 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
+            android:checked="true"
             android:text="Male"
             android:textColor="#fff" />
 
@@ -133,6 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
+            android:checked="true"
             android:text="Left"
             android:textColor="#fff" />
 
@@ -172,6 +174,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
+            android:checked="true"
             android:text="No"
             android:textColor="#fff" />
 
@@ -179,16 +182,15 @@
 
     <Button
         android:id="@+id/submit"
-        android:layout_width="383dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="11dp"
+        android:layout_width="355dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="17dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="17dp"
         android:background="#8BC34A"
         android:onClick="onSubmitClicked"
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupVision" />
 
