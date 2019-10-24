@@ -16,7 +16,7 @@ public class TestImageEasy extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_image_easy);
-        int totalTestImage = 5;
+        int totalTestImage = 6;
 
         final ArrayList<Integer> list1 = new ArrayList<Integer>(totalTestImage);
         ArrayList<Bitmap> bitmaps = new ArrayList<>(totalTestImage);

@@ -38,12 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     };
     private static final int PERMISSION_REQUEST_CODE=100;
 
+    List<String> xyData;
+
     public static int time;
     public TextView mTextField;
-
-    private int dragCounter, success;
-    int imgIndex;
-    CountDownTimer tim = new CountDownTimer(60000, 1000) {
+    CountDownTimer tim = new CountDownTimer(30000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
             time += 1;
@@ -56,8 +55,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             startActivity(intent);
         }
     };
-    List<String> xyData;
-    private ImageView img0, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15,sampleTestImage;
+    private int dragCounter, success;
+    int imgIndex;
+    private ImageView img0, img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,10 +65,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         xyData = new ArrayList<>();
 
+        Result.failedCounter += 1;
         time = 0;
         mTextField = findViewById(R.id.timer);
+
         imgIndex = Integer.parseInt(getIntent().getStringExtra("testImageNo"));
-        int totalTestImage = 17;
+
+        int totalTestImage = 5;
 
         img0 = findViewById(R.id.img0);
         img1 = findViewById(R.id.img1);
@@ -86,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         img13 = findViewById(R.id.img13);
         img14 = findViewById(R.id.img14);
         img15 = findViewById(R.id.img15);
-        sampleTestImage = findViewById(R.id.sampleTestImage);
         final List<ImageView> list = new ArrayList<>(15);
         list.add(img0);
         list.add(img1);
@@ -113,15 +115,27 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             list1.add(new Integer(i));
         }
 
-        int rand = new Random().nextInt(5);
         for (int i=0; i<=15; i++) {
-            if(i < 12){
+            if(i < 4){
                 bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+imgIndex+"/"+(i+1)+".png"));
-            } else {
+            }
+            else {
                 if(imgIndex >= 3){
-                    bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+(imgIndex-1)+"/"+(i-3)+".png"));
+                    if(i < 8){
+                        bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+(imgIndex-1)+"/"+(i-3)+".png"));
+                    } else if(i < 12){
+                        bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+(imgIndex-2)+"/"+(i-7)+".png"));
+                    }else if(i < 16){
+                        bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+(imgIndex-3)+"/"+(i-11)+".png"));
+                    }
                 }else {
-                    bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+(imgIndex+1)+"/"+(i-3)+".png"));
+                    if(i < 8){
+                        bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+(imgIndex+1)+"/"+(i-3)+".png"));
+                    } else if(i < 12){
+                        bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+(imgIndex+2)+"/"+(i-7)+".png"));
+                    }else if(i < 16){
+                        bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+(imgIndex+3)+"/"+(i-11)+".png"));
+                    }
                 }
             }
         }
@@ -130,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             tagList.add(list1.get(i));
         }
         if(isStoragePermissionGranted()){
-            sampleTestImage.setImageBitmap(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+imgIndex+"/"+"0.png"));
+            //sampleTestImage.setImageBitmap(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+imgIndex+"/"+"0.png"));
             for (int i = 0; i < 16; i++){
                 list.get(i).setImageBitmap(bitmaps.get(list1.get(i)));
                 list.get(i).setTag(""+tagList.get(i));
@@ -145,14 +159,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         findViewById(R.id.inputLayout2).setOnDragListener(this);
         findViewById(R.id.inputLayout3).setOnDragListener(this);
         findViewById(R.id.inputLayout4).setOnDragListener(this);
-        findViewById(R.id.inputLayout5).setOnDragListener(this);
-        findViewById(R.id.inputLayout6).setOnDragListener(this);
-        findViewById(R.id.inputLayout7).setOnDragListener(this);
-        findViewById(R.id.inputLayout8).setOnDragListener(this);
-        findViewById(R.id.inputLayout9).setOnDragListener(this);
-        findViewById(R.id.inputLayout10).setOnDragListener(this);
-        findViewById(R.id.inputLayout11).setOnDragListener(this);
-        findViewById(R.id.inputLayout12).setOnDragListener(this);
 
     }
 
@@ -202,12 +208,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         switch (event.getAction()) {
             // signal for the start of a drag and drop operation
             case DragEvent.ACTION_DRAG_STARTED:
-                // do nothing
                 break;
             // the drag point has entered the bounding box of the View
             case DragEvent.ACTION_DRAG_ENTERED:
                 v.setBackgroundColor(0xFFFFF6F9);
                 break;
+
             // the user has moved the drag shadow outside the bounding box of the View
             case DragEvent.ACTION_DRAG_EXITED:
                 v.setBackgroundColor(v.getId() == R.id.inputLayout1 ? 0xFFE8E6E7 : 0xFFB1BEC4);
@@ -234,9 +240,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 View view = (View) event.getLocalState();
                 // we want to make sure it is dropped only to left and right parent view
                 if (v.getId() == R.id.inputLayout1 || v.getId() == R.id.inputLayout2 || v.getId() == R.id.inputLayout3
-                        || v.getId() == R.id.inputLayout4 || v.getId() == R.id.inputLayout5 || v.getId() == R.id.inputLayout6
-                        || v.getId() == R.id.inputLayout7 || v.getId() == R.id.inputLayout8 || v.getId() == R.id.inputLayout9
-                        || v.getId() == R.id.inputLayout10 || v.getId() == R.id.inputLayout11 || v.getId() == R.id.inputLayout12) {
+                        || v.getId() == R.id.inputLayout4) {
                     ViewGroup source = (ViewGroup) view.getParent();
                     source.removeView(view);
                     LinearLayout target = (LinearLayout) v;
@@ -246,7 +250,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     dragCounter = dragCounter + 1;
                     if (dragCounter == 1){
                         tim.start();
-                        Result.failedCounter += 1;
                     }
                     if(Integer.parseInt(id) == Integer.parseInt(view.getTag().toString())){
                         success = success + 1;
@@ -255,10 +258,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         Toast.makeText(this, "Wrong", Toast.LENGTH_SHORT).show();
                     }
                     view.setVisibility(View.VISIBLE);
-                    if(dragCounter >= 12){
+                    if(dragCounter >= 4){
                         transitionToResult();
                     }
                 }
+                // make view visible as we set visibility to invisible while starting drag
+                //Toast.makeText(this, "" + view.getTag().toString(), Toast.LENGTH_SHORT).show();
+
                 break;
         }
 
@@ -288,7 +294,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
         return false;
     }
-
     public void onStartClicked(View view) {
         tim.start();
     }
@@ -297,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         transitionToResult();
     }
     public void onRetryClicked(View view) {
-        Intent intent = new Intent(this, TestImage.class);
+        Intent intent = new Intent(this, ModeSelection.class);
         intent.putExtra("time", time);
         startActivity(intent);
     }
@@ -311,5 +316,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         intent.putExtra("time", "" + time);
         tim.cancel();
         startActivity(intent);
+
     }
 }

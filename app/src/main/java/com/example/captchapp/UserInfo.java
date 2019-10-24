@@ -52,52 +52,8 @@ public class UserInfo extends AppCompatActivity {
                 break;
         }
 
-        /*
-
-        radioGroupGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch(checkedId) {
-                    case R.id.radioFemale:
-                        gender = "Female";
-                        break;
-                    case R.id.radioMale:
-                        gender = "Male";
-                        break;
-                }
-            }
-        });
-
-        radioGroupHand.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch(checkedId) {
-                    case R.id.rightHand:
-                        hand = "Right";
-                        break;
-                    case R.id.leftHand:
-                        hand = "Left";
-                        break;
-                }
-            }
-        });
-
-        radioGroupVision.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch(checkedId) {
-                    case R.id.impaired:
-                        vision = "Impaired";
-                        break;
-                    case R.id.notImpaired:
-                        vision = "Not Impaired";
-                        break;
-                }
-            }
-        });*/
-
         if(age.getText().toString().equals("") || hand.equals("") || gender.equals("") || vision.equals("")){
-            Toast.makeText(this, "" + gender, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Enter information first", Toast.LENGTH_SHORT).show();
         }else {
             usersAge = age.getText().toString();
             userInfo = usersAge + " " + gender + " " + vision + " " + hand;

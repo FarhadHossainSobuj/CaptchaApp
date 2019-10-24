@@ -31,11 +31,11 @@ public class ModeSelection extends AppCompatActivity {
     private void transition(String mode) {
         if(mode.equals("easy")){
             Intent intent = new Intent(this, TestImageEasy.class);
-            intent.putExtra("mode", mode);
+            intent.putExtra("mode", "easy");
             startActivity(intent);
         } else {
             Intent intent = new Intent(this, TestImage.class);
-            intent.putExtra("mode", mode);
+            intent.putExtra("mode", "hard");
             startActivity(intent);
         }
     }

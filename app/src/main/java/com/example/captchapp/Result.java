@@ -56,15 +56,15 @@ public class Result extends AppCompatActivity {
             }
 
         } else {
-            if((int)((result*100)/12) == 100){
-                tv.setText(" Your accuracy is: " + (double)((result*100)/12) + "%\n Age : " + age
+            if((int)((result*100)/4) == 100){
+                tv.setText(" Your accuracy is: " + (double)((result*100)/4) + "%\n Age : " + age
                         + ", Gender : " + gender + ", Vision : " + vision + "\n Hand : " + hand + ", Successful");
                 coords ="Age : " + age + ", Gender : " + gender + ", Vision : " + vision
                         + ", Hand : " + hand + "\nFor Capthca Image : " + imgNo + ", Mode : " + mode
                         +", Attempt: " + failedCounter + "\n"+ xy+"\nSuccessful\n\n";
                 failedCounter = 0;
             } else {
-                tv.setText(" Your accuracy is: " + (double)((result*100)/12) + "%\n Age : " + age
+                tv.setText(" Your accuracy is: " + (double)((result*100)/4) + "%\n Age : " + age
                         + ", Gender : " + gender + ", Vision : " + vision + "\n Hand : " + hand + ", Unsuccessful");
                 coords ="Age : " + age + ", Gender : " + gender + ", Vision : " + vision
                         + ", Hand : " + hand + "\nFor Capthca Image : " + imgNo + ", Mode : " + mode

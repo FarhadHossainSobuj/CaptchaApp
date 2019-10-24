@@ -113,15 +113,27 @@ public class ActivityEasyTask extends AppCompatActivity implements View.OnTouchL
             list1.add(new Integer(i));
         }
 
-        int rand = new Random().nextInt(5);
         for (int i=0; i<=15; i++) {
             if(i < 4){
                 bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/easy/"+imgIndex+"/"+(i+1)+".png"));
-            } else {
+            }
+            else {
                 if(imgIndex >= 3){
-                    bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+(imgIndex-1)+"/"+(i-3)+".png"));
+                    if(i < 8){
+                        bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/easy/"+(imgIndex-1)+"/"+(i-3)+".png"));
+                    } else if(i < 12){
+                        bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/easy/"+(imgIndex-2)+"/"+(i-7)+".png"));
+                    }else if(i < 16){
+                        bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/easy/"+(imgIndex-3)+"/"+(i-11)+".png"));
+                    }
                 }else {
-                    bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/hard/"+(imgIndex+1)+"/"+(i-3)+".png"));
+                    if(i < 8){
+                        bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/easy/"+(imgIndex+1)+"/"+(i-3)+".png"));
+                    } else if(i < 12){
+                        bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/easy/"+(imgIndex+2)+"/"+(i-7)+".png"));
+                    }else if(i < 16){
+                        bitmaps.add(BitmapFactory.decodeFile("/storage/emulated/0/img/easy/"+(imgIndex+3)+"/"+(i-11)+".png"));
+                    }
                 }
             }
         }
@@ -288,7 +300,7 @@ public class ActivityEasyTask extends AppCompatActivity implements View.OnTouchL
         transitionToResult();
     }
     public void onRetryClicked(View view) {
-        Intent intent = new Intent(this, TestImageEasy.class);
+        Intent intent = new Intent(this, ModeSelection.class);
         intent.putExtra("time", time);
         startActivity(intent);
     }
