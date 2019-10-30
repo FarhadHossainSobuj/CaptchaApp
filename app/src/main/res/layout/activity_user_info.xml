@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="177dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="175dp"
         android:background="#009688"
         android:padding="5dp"
@@ -20,31 +20,15 @@
         android:textColor="#CDDC39"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.982"
+        app:layout_constraintHorizontal_bias="0.975"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/age"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="99dp"
-        android:ems="10"
-        android:hint="Enter your age"
-        android:inputType="number"
-        android:textColor="#fff"
-        android:textColorHint="#fff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
         android:id="@+id/Gender"
         android:layout_width="249dp"
         android:layout_height="42dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="64dp"
         android:background="#009688"
         android:padding="5dp"
@@ -60,7 +44,7 @@
         android:id="@+id/radioGroupGender"
         android:layout_width="160dp"
         android:layout_height="58dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="196dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,20 +54,20 @@
             android:id="@+id/radioMale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
             android:checked="true"
             android:text="Male"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="229dp" />
 
         <RadioButton
             android:id="@+id/radioFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
             android:text="Female"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            tools:layout_editor_absoluteX="126dp"
+            tools:layout_editor_absoluteY="229dp" />
 
     </RadioGroup>
 
@@ -91,7 +75,6 @@
         android:id="@+id/hand"
         android:layout_width="198dp"
         android:layout_height="37dp"
-        android:layout_marginTop="28dp"
         android:background="#009688"
         android:padding="5dp"
         android:text="Select Your Hand?"
@@ -106,7 +89,6 @@
         android:id="@+id/vision"
         android:layout_width="243dp"
         android:layout_height="38dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="124dp"
         android:background="#009688"
         android:padding="5dp"
@@ -118,10 +100,26 @@
         app:layout_constraintStart_toStartOf="@+id/hand"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupHand" />
 
+    <TextView
+        android:id="@+id/mobility"
+        android:layout_width="243dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="8dp"
+        android:background="#009688"
+        android:padding="5dp"
+        android:text="Mobility impaired?"
+        android:textColor="#CDDC39"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/radioGroupMobility"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/radioGroupMobility"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupMobility" />
+
     <RadioGroup
         android:id="@+id/radioGroupHand"
         android:layout_width="163dp"
         android:layout_height="59dp"
+        android:layout_marginTop="4dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/hand"
         app:layout_constraintHorizontal_bias="0.0"
@@ -132,25 +130,55 @@
             android:id="@+id/leftHand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
             android:checked="true"
             android:text="Left"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="352dp" />
 
         <RadioButton
             android:id="@+id/rightHand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
             android:text="Right"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            tools:layout_editor_absoluteX="120dp"
+            tools:layout_editor_absoluteY="352dp" />
 
     </RadioGroup>
 
     <RadioGroup
         android:id="@+id/radioGroupVision"
+        android:layout_width="122dp"
+        android:layout_height="39dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/mobility"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="@+id/mobility"
+        app:layout_constraintTop_toBottomOf="@+id/mobility">
+
+        <RadioButton
+            android:id="@+id/impaired"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:textColor="#fff"
+            tools:layout_editor_absoluteX="58dp"
+            tools:layout_editor_absoluteY="598dp" />
+
+        <RadioButton
+            android:id="@+id/notImpaired"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="No"
+            android:textColor="#fff"
+            tools:layout_editor_absoluteX="114dp"
+            tools:layout_editor_absoluteY="598dp" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroupMobility"
         android:layout_width="122dp"
         android:layout_height="55dp"
         android:orientation="horizontal"
@@ -160,7 +188,7 @@
         app:layout_constraintTop_toBottomOf="@+id/vision">
 
         <RadioButton
-            android:id="@+id/impaired"
+            android:id="@+id/Mimpaired"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -169,7 +197,7 @@
             android:textColor="#fff" />
 
         <RadioButton
-            android:id="@+id/notImpaired"
+            android:id="@+id/MNotImpaired"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -177,7 +205,6 @@
             android:checked="true"
             android:text="No"
             android:textColor="#fff" />
-
     </RadioGroup>
 
     <Button
@@ -185,7 +212,7 @@
         android:layout_width="355dp"
         android:layout_height="49dp"
         android:layout_marginStart="17dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="17dp"
         android:background="#8BC34A"
         android:onClick="onSubmitClicked"
@@ -194,5 +221,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroupVision" />
 
+    <EditText
+        android:id="@+id/age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="99dp"
+        android:ems="10"
+        android:hint="Enter your age"
+        android:inputType="number"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </android.support.constraint.ConstraintLayout>

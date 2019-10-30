@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     public static int time;
     public TextView mTextField;
-    CountDownTimer tim = new CountDownTimer(30000, 1000) {
+    CountDownTimer tim = new CountDownTimer(60000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
             time += 1;

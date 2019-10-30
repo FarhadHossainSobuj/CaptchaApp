@@ -11,9 +11,9 @@ import android.widget.Toast;
 
 public class UserInfo extends AppCompatActivity {
     private EditText age;
-    private RadioGroup radioGroupGender, radioGroupHand, radioGroupVision;
+    private RadioGroup radioGroupGender, radioGroupHand, radioGroupVision, radioGroupMobility;
     public String userInfo;
-    public static String gender, vision, hand, usersAge;
+    public static String gender, vision, mobility, hand, usersAge;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +24,8 @@ public class UserInfo extends AppCompatActivity {
         radioGroupGender = findViewById(R.id.radioGroupGender);
         radioGroupHand = findViewById(R.id.radioGroupHand);
         radioGroupVision = findViewById(R.id.radioGroupVision);
+        radioGroupMobility = findViewById(R.id.radioGroupMobility);
+
 
     }
     public void onSubmitClicked(View view){
@@ -51,8 +53,16 @@ public class UserInfo extends AppCompatActivity {
                 vision = "Not Impaired";
                 break;
         }
+        switch (radioGroupMobility.getCheckedRadioButtonId()){
+            case R.id.Mimpaired:
+                mobility = "MImpaired";
+                break;
+            case R.id.MNotImpaired:
+                mobility = "Not Mobility Impaired";
+                break;
+        }
 
-        if(age.getText().toString().equals("") || hand.equals("") || gender.equals("") || vision.equals("")){
+        if(age.getText().toString().equals("") || hand.equals("") || gender.equals("") || vision.equals("") || mobility.equals("")){
             Toast.makeText(this, "Enter information first", Toast.LENGTH_SHORT).show();
         }else {
             usersAge = age.getText().toString();

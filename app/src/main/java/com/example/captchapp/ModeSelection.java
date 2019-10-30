@@ -20,6 +20,8 @@ public class ModeSelection extends AppCompatActivity {
                     case R.id.easy:
                         transition("easy");
                         break;
+                    case R.id.medium:
+                        break;
                     case R.id.hard:
                         transition("hard");
                         break;

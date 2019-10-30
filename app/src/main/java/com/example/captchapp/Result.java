@@ -38,19 +38,20 @@ public class Result extends AppCompatActivity {
         String gender = UserInfo.gender;
         String vision = UserInfo.vision;
         String hand = UserInfo.hand;
+        String mobility = UserInfo.mobility;
 
         if(mode.equals("easy")){
             if((int)((result*100)/4) == 100){
                 tv.setText(" Your accuracy is: " + (double)((result*100)/4) + "%\n Age : " + age
-                        + ", Gender : " + gender + ", Vision : " + vision + "\n Hand : " + hand + ", Successful");
-                coords ="Age : " + age + ", Gender : " + gender + ", Vision : " + vision
+                        + ", Gender : " + gender + ", Vision : " + vision + ", Mobility : "+ mobility + "\n Hand : " + hand + ", Successful");
+                coords ="Age : " + age + ", Gender : " + gender + ", Vision : " + vision + ", Mobility : "+ mobility
                         + ", Hand : " + hand + "\nFor Capthca Image : " + imgNo + ", Mode : " + mode
                         +", Attempt: " + failedCounter + "\n"+ xy+"\nSuccessful\n\n";
                 failedCounter = 0;
             } else {
                 tv.setText(" Your accuracy is: " + (double)((result*100)/4) + "%\n Age : " + age
-                        + ", Gender : " + gender + ", Vision : " + vision + "\n Hand : " + hand + ", Unsuccessful");
-                coords ="Age : " + age + ", Gender : " + gender + ", Vision : " + vision
+                        + ", Gender : " + gender + ", Vision : " + vision + ", Mobility : "+ mobility + "\n Hand : " + hand + ", Unsuccessful");
+                coords ="Age : " + age + ", Gender : " + gender + ", Vision : " + vision+ ", Mobility : "+ mobility
                         + ", Hand : " + hand + "\nFor Capthca Image : " + imgNo + ", Mode : " + mode
                         +", Attempt: " + failedCounter + "\n"+ xy+"\nUnsuccessful\n\n";
             }
@@ -58,16 +59,16 @@ public class Result extends AppCompatActivity {
         } else {
             if((int)((result*100)/4) == 100){
                 tv.setText(" Your accuracy is: " + (double)((result*100)/4) + "%\n Age : " + age
-                        + ", Gender : " + gender + ", Vision : " + vision + "\n Hand : " + hand + ", Successful");
-                coords ="Age : " + age + ", Gender : " + gender + ", Vision : " + vision
+                        + ", Gender : " + gender + ", Vision : " + vision + ", Mobility : "+ mobility + "\n Hand : " + hand + ", Successful");
+                coords ="Age : " + age + ", Gender : " + gender + ", Vision : " + vision + ", Mobility : "+ mobility
                         + ", Hand : " + hand + "\nFor Capthca Image : " + imgNo + ", Mode : " + mode
                         +", Attempt: " + failedCounter + "\n"+ xy+"\nSuccessful\n\n";
                 failedCounter = 0;
             } else {
                 tv.setText(" Your accuracy is: " + (double)((result*100)/4) + "%\n Age : " + age
-                        + ", Gender : " + gender + ", Vision : " + vision + "\n Hand : " + hand + ", Unsuccessful");
+                        + ", Gender : " + gender + ", Vision : " + vision + ", Mobility : "+ mobility + "\n Hand : " + hand + ", Unsuccessful");
                 coords ="Age : " + age + ", Gender : " + gender + ", Vision : " + vision
-                        + ", Hand : " + hand + "\nFor Capthca Image : " + imgNo + ", Mode : " + mode
+                        + ", Hand : " + hand + ", Mobility : "+ mobility  + "\nFor Capthca Image : " + imgNo + ", Mode : " + mode
                         +", Attempt: " + failedCounter + "\n"+ xy+"\nUnsuccessful\n\n";
             }
         }
